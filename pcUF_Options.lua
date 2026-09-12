@@ -1,5 +1,5 @@
-local gUF = LibStub("AceAddon-3.0"):GetAddon("gUF")
-local L = LibStub("AceLocale-3.0"):GetLocale("gUF", true)
+local pcUF = LibStub("AceAddon-3.0"):GetAddon("pcUF")
+local L = LibStub("AceLocale-3.0"):GetLocale("pcUF", true)
 
 local anchorPoints = {
 	[1] = L["Bottom Left"],
@@ -12,17 +12,17 @@ local anchorPoints = {
 
 local function getOption(info)
 	if (info.arg[2]) then
-		return gUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]]
+		return pcUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]]
 	else
-		return gUF.db.profile[info.arg[1]][info.arg[3]]
+		return pcUF.db.profile[info.arg[1]][info.arg[3]]
 	end
 end
 
 local function setOption(info, value)
 	if (info.arg[2]) then
-		gUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]] = value
+		pcUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]] = value
 	else
-		gUF.db.profile[info.arg[1]][info.arg[3]] = value
+		pcUF.db.profile[info.arg[1]][info.arg[3]] = value
 	end
 	if (info.arg[4]) then
 		local func = info.arg[4]
@@ -31,14 +31,14 @@ local function setOption(info, value)
 end
 
 local function getColor(info)
-	return gUF.db.profile[info.arg[1]][info.arg[2]].r, gUF.db.profile[info.arg[1]][info.arg[2]].g, gUF.db.profile[info.arg[1]][info.arg[2]].b, gUF.db.profile[info.arg[1]][info.arg[2]].a
+	return pcUF.db.profile[info.arg[1]][info.arg[2]].r, pcUF.db.profile[info.arg[1]][info.arg[2]].g, pcUF.db.profile[info.arg[1]][info.arg[2]].b, pcUF.db.profile[info.arg[1]][info.arg[2]].a
 end
 
 local function setColor(info, r, g, b, a)
-	gUF.db.profile[info.arg[1]][info.arg[2]].r = r
-	gUF.db.profile[info.arg[1]][info.arg[2]].g = g
-	gUF.db.profile[info.arg[1]][info.arg[2]].b = b
-	gUF.db.profile[info.arg[1]][info.arg[2]].a = a
+	pcUF.db.profile[info.arg[1]][info.arg[2]].r = r
+	pcUF.db.profile[info.arg[1]][info.arg[2]].g = g
+	pcUF.db.profile[info.arg[1]][info.arg[2]].b = b
+	pcUF.db.profile[info.arg[1]][info.arg[2]].a = a
 	if (info.arg[3]) then
 		local func = info.arg[3]
 		func()
@@ -50,7 +50,7 @@ local textures = {}
 local function GetTextures()
 	for k in pairs(textures) do textures[k] = nil end
 
-	for _, name in pairs(gUF.LSM:List(gUF.LSM.MediaType.STATUSBAR)) do
+	for _, name in pairs(pcUF.LSM:List(pcUF.LSM.MediaType.STATUSBAR)) do
 		textures[name] = name
 	end
 
@@ -59,27 +59,27 @@ end
 
 --local function getBuffDebuffPosition(info)
 ----	if (info.arg[2]) then
-----		return position[ gUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]] ]
+----		return position[ pcUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]] ]
 ----	else
-----		return position[ gUF.db.profile[info.arg[1]][info.arg[3]] ]
+----		return position[ pcUF.db.profile[info.arg[1]][info.arg[3]] ]
 ----	end
 ----	for i=1,6 do
-----		if (position[i] == gUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]]) then
+----		if (position[i] == pcUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]]) then
 ----			return i
 ----		end
 ----	end
 --	if (info.arg[2]) then
---		return gUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]]
+--		return pcUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]]
 --	else
---		return gUF.db.profile[info.arg[1]][info.arg[3]]
+--		return pcUF.db.profile[info.arg[1]][info.arg[3]]
 --	end
 --end
 --
 --local function setBuffDebuffPosition(info, value)
 --	if (info.arg[2]) then
---		gUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]] = value
+--		pcUF.db.profile[info.arg[1]][info.arg[2]][info.arg[3]] = value
 --	else
---		gUF.db.profile[info.arg[1]][info.arg[3]] = value
+--		pcUF.db.profile[info.arg[1]][info.arg[3]] = value
 --	end
 --	if (info.arg[4]) then
 --		local func = info.arg[4]
@@ -87,8 +87,8 @@ end
 --	end
 --end
 
-gUF.options = {
-	name = "gUF",
+pcUF.options = {
+	name = "pcUF",
 	desc = "desc",
 	type="group",
 	childGroups = "tree",
@@ -133,7 +133,7 @@ gUF.options = {
 							hasAlpha = true,
 							get = getColor,
 							set = setColor,
-							arg = {"global", L["Background Color"], function() gUF:SetupAllBorderBackground() end},
+							arg = {"global", L["Background Color"], function() pcUF:SetupAllBorderBackground() end},
 						},
 						BorderColor = {
 							name = L["Border Color"],
@@ -143,7 +143,7 @@ gUF.options = {
 							hasAlpha = true,
 							get = getColor,
 							set = setColor,
-							arg = {"global", L["Border Color"], function() gUF:SetupAllBorderBackground() end},
+							arg = {"global", L["Border Color"], function() pcUF:SetupAllBorderBackground() end},
 						},
 						Reset = {
 							name = L["Reset"],
@@ -151,15 +151,15 @@ gUF.options = {
 							type = "toggle",
 							order = 3,
 							set = function()
-								gUF.db.profile.global[L["Background Color"]].r = gUF.defaults.profile.global[L["Background Color"]].r
-								gUF.db.profile.global[L["Background Color"]].g = gUF.defaults.profile.global[L["Background Color"]].g
-								gUF.db.profile.global[L["Background Color"]].b = gUF.defaults.profile.global[L["Background Color"]].b
-								gUF.db.profile.global[L["Background Color"]].a = gUF.defaults.profile.global[L["Background Color"]].a
-								gUF.db.profile.global[L["Border Color"]].r = gUF.defaults.profile.global[L["Border Color"]].r
-								gUF.db.profile.global[L["Border Color"]].g = gUF.defaults.profile.global[L["Border Color"]].g
-								gUF.db.profile.global[L["Border Color"]].b = gUF.defaults.profile.global[L["Border Color"]].b
-								gUF.db.profile.global[L["Border Color"]].a = gUF.defaults.profile.global[L["Border Color"]].a
-								gUF:SetupAllBorderBackground()
+								pcUF.db.profile.global[L["Background Color"]].r = pcUF.defaults.profile.global[L["Background Color"]].r
+								pcUF.db.profile.global[L["Background Color"]].g = pcUF.defaults.profile.global[L["Background Color"]].g
+								pcUF.db.profile.global[L["Background Color"]].b = pcUF.defaults.profile.global[L["Background Color"]].b
+								pcUF.db.profile.global[L["Background Color"]].a = pcUF.defaults.profile.global[L["Background Color"]].a
+								pcUF.db.profile.global[L["Border Color"]].r = pcUF.defaults.profile.global[L["Border Color"]].r
+								pcUF.db.profile.global[L["Border Color"]].g = pcUF.defaults.profile.global[L["Border Color"]].g
+								pcUF.db.profile.global[L["Border Color"]].b = pcUF.defaults.profile.global[L["Border Color"]].b
+								pcUF.db.profile.global[L["Border Color"]].a = pcUF.defaults.profile.global[L["Border Color"]].a
+								pcUF:SetupAllBorderBackground()
 							end,
 						},
 					},
@@ -185,7 +185,7 @@ gUF.options = {
 									values = GetTextures,
 									get = getOption,
 									set = setOption,
-									arg = {"global", nil, L["Status Bar Texture"], function() gUF:SetupAllStatusBarTextures() end},
+									arg = {"global", nil, L["Status Bar Texture"], function() pcUF:SetupAllStatusBarTextures() end},
 								},
 								statusBarBackgroundTexture = {
 									name = L["Status Bar Background Texture"],
@@ -196,7 +196,7 @@ gUF.options = {
 									values = GetTextures,
 									get = getOption,
 									set = setOption,
-									arg = {"global", nil, L["Status Bar Background Texture"], function() gUF:SetupAllStatusBarBackgroundTextures() end},
+									arg = {"global", nil, L["Status Bar Background Texture"], function() pcUF:SetupAllStatusBarBackgroundTextures() end},
 								},
 							},
 						},
@@ -214,7 +214,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Health Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Health Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								manaBarColor = {
 									name = L["Mana Bar Color"],
@@ -224,7 +224,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Mana Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Mana Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								rageBarColor = {
 									name = L["Rage Bar Color"],
@@ -234,7 +234,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Rage Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Rage Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								focusBarColor = {
 									name = L["Focus Bar Color"],
@@ -244,7 +244,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Focus Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Focus Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								energyBarColor = {
 									name = L["Energy Bar Color"],
@@ -254,7 +254,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Energy Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Energy Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								chiBarColor = {
 									name = L["Chi Bar Color"],
@@ -264,7 +264,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Chi Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Chi Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								runesBarColor = {
 									name = L["Runes Bar Color"],
@@ -274,7 +274,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Runes Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Runes Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								runicPowerBarColor = {
 									name = L["Runic Power Bar Color"],
@@ -284,7 +284,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Runic Power Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Runic Power Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								soulShardsBarColor = {
 									name = L["Soul Shards Bar Color"],
@@ -294,7 +294,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Soul Shards Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Soul Shards Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								lunarPowerBarColor = {
 									name = L["Astral Power Bar Color"],
@@ -304,7 +304,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Astral Power Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Astral Power Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								holyPowerBarColor = {
 									name = L["Holy Power Bar Color"],
@@ -314,7 +314,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Holy Power Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Holy Power Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								maelstromBarColor = {
 									name = L["Maelstrom Bar Color"],
@@ -324,7 +324,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Maelstrom Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Maelstrom Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								insanityBarColor = {
 									name = L["Insanity Bar Color"],
@@ -334,7 +334,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Insanity Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Insanity Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								furyBarColor = {
 									name = L["Fury Bar Color"],
@@ -344,7 +344,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Fury Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Fury Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								painBarColor = {
 									name = L["Pain Bar Color"],
@@ -354,7 +354,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Pain Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Pain Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								essenceBarColor = {
 									name = L["Essence Bar Color"],
@@ -364,7 +364,7 @@ gUF.options = {
 									hasAlpha = true,
 									get = getColor,
 									set = setColor,
-									arg = {"global", L["Essence Bar Color"], function() gUF:SetupAllBarColors() end},
+									arg = {"global", L["Essence Bar Color"], function() pcUF:SetupAllBarColors() end},
 								},
 								Reset = {
 									name = L["Reset"],
@@ -372,23 +372,23 @@ gUF.options = {
 									type = "toggle",
 									order = 16,
 									set = function()
-										gUF.db.profile.global[L["Health Bar Color"]] = gUF.defaults.profile.global[L["Health Bar Color"]]
-										gUF.db.profile.global[L["Mana Bar Color"]] = gUF.defaults.profile.global[L["Mana Bar Color"]]
-										gUF.db.profile.global[L["Rage Bar Color"]] = gUF.defaults.profile.global[L["Rage Bar Color"]]
-										gUF.db.profile.global[L["Focus Bar Color"]] = gUF.defaults.profile.global[L["Focus Bar Color"]]
-										gUF.db.profile.global[L["Energy Bar Color"]] = gUF.defaults.profile.global[L["Energy Bar Color"]]
-										gUF.db.profile.global[L["Chi Bar Color"]] = gUF.defaults.profile.global[L["Chi Bar Color"]]
-										gUF.db.profile.global[L["Runes Bar Color"]] = gUF.defaults.profile.global[L["Runes Bar Color"]]
-										gUF.db.profile.global[L["Runic Power Bar Color"]] = gUF.defaults.profile.global[L["Runic Power Bar Color"]]
-										gUF.db.profile.global[L["Soul Shards Bar Color"]] = gUF.defaults.profile.global[L["Soul Shards Bar Color"]]
-										gUF.db.profile.global[L["Astral Power Bar Color"]] = gUF.defaults.profile.global[L["Astral Power Bar Color"]]
-										gUF.db.profile.global[L["Holy Power Bar Color"]] = gUF.defaults.profile.global[L["Holy Power Bar Color"]]
-										gUF.db.profile.global[L["Maelstrom Bar Color"]] = gUF.defaults.profile.global[L["Maelstrom Bar Color"]]
-										gUF.db.profile.global[L["Insanity Bar Color"]] = gUF.defaults.profile.global[L["Insanity Bar Color"]]
-										gUF.db.profile.global[L["Fury Bar Color"]] = gUF.defaults.profile.global[L["Fury Bar Color"]]
-										gUF.db.profile.global[L["Pain Bar Color"]] = gUF.defaults.profile.global[L["Pain Bar Color"]]
-										gUF.db.profile.global[L["Essence Bar Color"]] = gUF.defaults.profile.global[L["Essence Bar Color"]]
-										gUF:SetupAllBarColors()
+										pcUF.db.profile.global[L["Health Bar Color"]] = pcUF.defaults.profile.global[L["Health Bar Color"]]
+										pcUF.db.profile.global[L["Mana Bar Color"]] = pcUF.defaults.profile.global[L["Mana Bar Color"]]
+										pcUF.db.profile.global[L["Rage Bar Color"]] = pcUF.defaults.profile.global[L["Rage Bar Color"]]
+										pcUF.db.profile.global[L["Focus Bar Color"]] = pcUF.defaults.profile.global[L["Focus Bar Color"]]
+										pcUF.db.profile.global[L["Energy Bar Color"]] = pcUF.defaults.profile.global[L["Energy Bar Color"]]
+										pcUF.db.profile.global[L["Chi Bar Color"]] = pcUF.defaults.profile.global[L["Chi Bar Color"]]
+										pcUF.db.profile.global[L["Runes Bar Color"]] = pcUF.defaults.profile.global[L["Runes Bar Color"]]
+										pcUF.db.profile.global[L["Runic Power Bar Color"]] = pcUF.defaults.profile.global[L["Runic Power Bar Color"]]
+										pcUF.db.profile.global[L["Soul Shards Bar Color"]] = pcUF.defaults.profile.global[L["Soul Shards Bar Color"]]
+										pcUF.db.profile.global[L["Astral Power Bar Color"]] = pcUF.defaults.profile.global[L["Astral Power Bar Color"]]
+										pcUF.db.profile.global[L["Holy Power Bar Color"]] = pcUF.defaults.profile.global[L["Holy Power Bar Color"]]
+										pcUF.db.profile.global[L["Maelstrom Bar Color"]] = pcUF.defaults.profile.global[L["Maelstrom Bar Color"]]
+										pcUF.db.profile.global[L["Insanity Bar Color"]] = pcUF.defaults.profile.global[L["Insanity Bar Color"]]
+										pcUF.db.profile.global[L["Fury Bar Color"]] = pcUF.defaults.profile.global[L["Fury Bar Color"]]
+										pcUF.db.profile.global[L["Pain Bar Color"]] = pcUF.defaults.profile.global[L["Pain Bar Color"]]
+										pcUF.db.profile.global[L["Essence Bar Color"]] = pcUF.defaults.profile.global[L["Essence Bar Color"]]
+										pcUF:SetupAllBarColors()
 									end,
 								},
 							},
@@ -406,7 +406,7 @@ gUF.options = {
 									order = 1,
 									get = getOption,
 									set = setOption,
-									arg = {"global", nil, L["Color Frame By Debuff"], function() if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+									arg = {"global", nil, L["Color Frame By Debuff"], function() if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 								},
 							},
 						},
@@ -418,7 +418,7 @@ gUF.options = {
 --							hasAlpha = true,
 --							get = getColor,
 --							set = setColor,
---							arg = {"global", L["Background Color"], function() gUF:SetupAllBorderBackground() end},
+--							arg = {"global", L["Background Color"], function() pcUF:SetupAllBorderBackground() end},
 --						},
 --						BorderColor = {
 --							name = L["Border Color"],
@@ -428,7 +428,7 @@ gUF.options = {
 --							hasAlpha = true,
 --							get = getColor,
 --							set = setColor,
---							arg = {"global", L["Border Color"], function() gUF:SetupAllBorderBackground() end},
+--							arg = {"global", L["Border Color"], function() pcUF:SetupAllBorderBackground() end},
 --						},
 --						Reset = {
 --							name = L["Reset"],
@@ -436,15 +436,15 @@ gUF.options = {
 --							type = "toggle",
 --							order = 3,
 --							set = function()
---								gUF.db.profile.global[L["Background Color"]].r = gUF.defaults.profile.global[L["Background Color"]].r
---								gUF.db.profile.global[L["Background Color"]].g = gUF.defaults.profile.global[L["Background Color"]].g
---								gUF.db.profile.global[L["Background Color"]].b = gUF.defaults.profile.global[L["Background Color"]].b
---								gUF.db.profile.global[L["Background Color"]].a = gUF.defaults.profile.global[L["Background Color"]].a
---								gUF.db.profile.global[L["Border Color"]].r = gUF.defaults.profile.global[L["Border Color"]].r
---								gUF.db.profile.global[L["Border Color"]].g = gUF.defaults.profile.global[L["Border Color"]].g
---								gUF.db.profile.global[L["Border Color"]].b = gUF.defaults.profile.global[L["Border Color"]].b
---								gUF.db.profile.global[L["Border Color"]].a = gUF.defaults.profile.global[L["Border Color"]].a
---								gUF:SetupAllBorderBackground()
+--								pcUF.db.profile.global[L["Background Color"]].r = pcUF.defaults.profile.global[L["Background Color"]].r
+--								pcUF.db.profile.global[L["Background Color"]].g = pcUF.defaults.profile.global[L["Background Color"]].g
+--								pcUF.db.profile.global[L["Background Color"]].b = pcUF.defaults.profile.global[L["Background Color"]].b
+--								pcUF.db.profile.global[L["Background Color"]].a = pcUF.defaults.profile.global[L["Background Color"]].a
+--								pcUF.db.profile.global[L["Border Color"]].r = pcUF.defaults.profile.global[L["Border Color"]].r
+--								pcUF.db.profile.global[L["Border Color"]].g = pcUF.defaults.profile.global[L["Border Color"]].g
+--								pcUF.db.profile.global[L["Border Color"]].b = pcUF.defaults.profile.global[L["Border Color"]].b
+--								pcUF.db.profile.global[L["Border Color"]].a = pcUF.defaults.profile.global[L["Border Color"]].a
+--								pcUF:SetupAllBorderBackground()
 --							end,
 --						},
 					},
@@ -531,7 +531,7 @@ gUF.options = {
 							order = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", nil, L["Enabled"], function() gUF:CreateRemoveFrames() end},
+							arg = {"player", nil, L["Enabled"], function() pcUF:CreateRemoveFrames() end},
 						},
 						colorNamesByClass = {
 							name = L["Color Names By Class"],
@@ -540,7 +540,7 @@ gUF.options = {
 							--order = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", nil, L["Color Names By Class"], function() if (UnitExists("player")) then gUF:UNIT_FACTION(nil, "player") end end},
+							arg = {"player", nil, L["Color Names By Class"], function() if (UnitExists("player")) then pcUF:UNIT_FACTION(nil, "player") end end},
 						},
 						showPvPStatusIcon = {
 							name = L["Show PvP Status Icon"],
@@ -549,7 +549,7 @@ gUF.options = {
 							--order = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", nil, L["Show PvP Status Icon"], function() if (UnitExists("player")) then gUF:UNIT_FACTION(nil, "player") end end},
+							arg = {"player", nil, L["Show PvP Status Icon"], function() if (UnitExists("player")) then pcUF:UNIT_FACTION(nil, "player") end end},
 						},
 					},
 				},
@@ -568,7 +568,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "buffs", L["Number of Buffs"], function() gUF:ResetBuffsAndDebuffs("player") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "buffs", L["Number of Buffs"], function() pcUF:ResetBuffsAndDebuffs("player") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						buffsPerRow = {
 							name = L["Buffs Per Row"],
@@ -580,7 +580,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "buffs", L["Buffs Per Row"], function() gUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "buffs", L["Buffs Per Row"], function() pcUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						horizontalSpacing = {
 							name = L["Horizontal Spacing"],
@@ -592,7 +592,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "buffs", L["Horizontal Spacing"], function() gUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "buffs", L["Horizontal Spacing"], function() pcUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						verticalSpacing = {
 							name = L["Vertical Spacing"],
@@ -604,7 +604,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "buffs", L["Vertical Spacing"], function() gUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "buffs", L["Vertical Spacing"], function() pcUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						xOffset = {
 							name = L["X Offset"],
@@ -616,7 +616,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "buffs", L["X Offset"], function() gUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "buffs", L["X Offset"], function() pcUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						yOffset = {
 							name = L["Y Offset"],
@@ -628,7 +628,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "buffs", L["Y Offset"], function() gUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "buffs", L["Y Offset"], function() pcUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						position = {
 							name = L["Position"],
@@ -639,7 +639,7 @@ gUF.options = {
 							get = getOption,
 							set = setOption,
 							values = anchorPoints,
-							arg = {"player", "buffs", L["Position"], function() gUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "buffs", L["Position"], function() pcUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						growUpwards = {
 							name = L["Grow Upwards"],
@@ -648,7 +648,7 @@ gUF.options = {
 							order = 8,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "buffs", L["Grow Upwards"], function() gUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "buffs", L["Grow Upwards"], function() pcUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						expandLeft = {
 							name = L["Expand Left"],
@@ -657,7 +657,7 @@ gUF.options = {
 							order = 9,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "buffs", L["Expand Left"], function() gUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "buffs", L["Expand Left"], function() pcUF:LayoutBuffs(nil, "player", "buffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						showCooldownModels = {
 							name = L["Show Cooldown Models"],
@@ -666,7 +666,7 @@ gUF.options = {
 							order = 10,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "buffs", L["Show Cooldown Models"], function() gUF:ResetBuffsAndDebuffs("player") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "buffs", L["Show Cooldown Models"], function() pcUF:ResetBuffsAndDebuffs("player") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						classicBuffDebuffMode = {
 							name = L["Classic Buff & Debuff Mode"],
@@ -675,7 +675,7 @@ gUF.options = {
 							order = 11,
 							get = getOption,
 							set = setOption,
-							arg = {"player", nil, L["Classic Buff & Debuff Mode"], function() gUF:LayoutBuffs(nil, "player", "buffs") gUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", nil, L["Classic Buff & Debuff Mode"], function() pcUF:LayoutBuffs(nil, "player", "buffs") pcUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 					},
 				},
@@ -694,7 +694,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "debuffs", L["Number of Debuffs"], function() gUF:ResetBuffsAndDebuffs("player") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "debuffs", L["Number of Debuffs"], function() pcUF:ResetBuffsAndDebuffs("player") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						buffsPerRow = {
 							name = L["Debuffs Per Row"],
@@ -706,7 +706,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "debuffs", L["Buffs Per Row"], function() gUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "debuffs", L["Buffs Per Row"], function() pcUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						horizontalSpacing = {
 							name = L["Horizontal Spacing"],
@@ -718,7 +718,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "debuffs", L["Horizontal Spacing"], function() gUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "debuffs", L["Horizontal Spacing"], function() pcUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						verticalSpacing = {
 							name = L["Vertical Spacing"],
@@ -730,7 +730,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "debuffs", L["Vertical Spacing"], function() gUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "debuffs", L["Vertical Spacing"], function() pcUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						xOffset = {
 							name = L["X Offset"],
@@ -742,7 +742,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "debuffs", L["X Offset"], function() gUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "debuffs", L["X Offset"], function() pcUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						yOffset = {
 							name = L["Y Offset"],
@@ -754,7 +754,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "debuffs", L["Y Offset"], function() gUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "debuffs", L["Y Offset"], function() pcUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						position = {
 							name = L["Position"],
@@ -765,7 +765,7 @@ gUF.options = {
 							get = getOption,
 							set = setOption,
 							values = anchorPoints,
-							arg = {"player", "debuffs", L["Position"], function() gUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "debuffs", L["Position"], function() pcUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						growUpwards = {
 							name = L["Grow Upwards"],
@@ -774,7 +774,7 @@ gUF.options = {
 							order = 8,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "debuffs", L["Grow Upwards"], function() gUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "debuffs", L["Grow Upwards"], function() pcUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						expandLeft = {
 							name = L["Expand Left"],
@@ -783,7 +783,7 @@ gUF.options = {
 							order = 9,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "debuffs", L["Expand Left"], function() gUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "debuffs", L["Expand Left"], function() pcUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						showCooldownModels = {
 							name = L["Show Cooldown Models"],
@@ -792,7 +792,7 @@ gUF.options = {
 							order = 10,
 							get = getOption,
 							set = setOption,
-							arg = {"player", "debuffs", L["Show Cooldown Models"], function() gUF:ResetBuffsAndDebuffs("player") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", "debuffs", L["Show Cooldown Models"], function() pcUF:ResetBuffsAndDebuffs("player") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						classicBuffDebuffMode = {
 							name = L["Classic Buff & Debuff Mode"],
@@ -801,7 +801,7 @@ gUF.options = {
 							order = 11,
 							get = getOption,
 							set = setOption,
-							arg = {"player", nil, L["Classic Buff & Debuff Mode"], function() gUF:LayoutBuffs(nil, "player", "buffs") gUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"player", nil, L["Classic Buff & Debuff Mode"], function() pcUF:LayoutBuffs(nil, "player", "buffs") pcUF:LayoutBuffs(nil, "player", "debuffs") if (UnitExists("player")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 					},
 				},
@@ -852,7 +852,7 @@ gUF.options = {
 							order = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", nil, L["Enabled"], function() gUF:CreateRemoveFrames() end},
+							arg = {"target", nil, L["Enabled"], function() pcUF:CreateRemoveFrames() end},
 						},
 						colorNamesByClass = {
 							name = L["Color Names By Class"],
@@ -861,7 +861,7 @@ gUF.options = {
 							--order = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", nil, L["Color Names By Class"], function() if (UnitExists("target")) then gUF:UNIT_FACTION(nil, "target") end end},
+							arg = {"target", nil, L["Color Names By Class"], function() if (UnitExists("target")) then pcUF:UNIT_FACTION(nil, "target") end end},
 						},
 						showPvPStatusIcon = {
 							name = L["Show PvP Status Icon"],
@@ -870,7 +870,7 @@ gUF.options = {
 							--order = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", nil, L["Show PvP Status Icon"], function() if (UnitExists("target")) then gUF:UNIT_FACTION(nil, "target") end end},
+							arg = {"target", nil, L["Show PvP Status Icon"], function() if (UnitExists("target")) then pcUF:UNIT_FACTION(nil, "target") end end},
 						},
 					},
 				},
@@ -889,7 +889,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "buffs", L["Number of Buffs"], function() gUF:ResetBuffsAndDebuffs("target") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "buffs", L["Number of Buffs"], function() pcUF:ResetBuffsAndDebuffs("target") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						buffsPerRow = {
 							name = L["Buffs Per Row"],
@@ -901,7 +901,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "buffs", L["Buffs Per Row"], function() gUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "buffs", L["Buffs Per Row"], function() pcUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						horizontalSpacing = {
 							name = L["Horizontal Spacing"],
@@ -913,7 +913,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "buffs", L["Horizontal Spacing"], function() gUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "buffs", L["Horizontal Spacing"], function() pcUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						verticalSpacing = {
 							name = L["Vertical Spacing"],
@@ -925,7 +925,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "buffs", L["Vertical Spacing"], function() gUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "buffs", L["Vertical Spacing"], function() pcUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						xOffset = {
 							name = L["X Offset"],
@@ -937,7 +937,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "buffs", L["X Offset"], function() gUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "buffs", L["X Offset"], function() pcUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						yOffset = {
 							name = L["Y Offset"],
@@ -949,7 +949,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "buffs", L["Y Offset"], function() gUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "buffs", L["Y Offset"], function() pcUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						position = {
 							name = L["Position"],
@@ -960,7 +960,7 @@ gUF.options = {
 							get = getOption,
 							set = setOption,
 							values = anchorPoints,
-							arg = {"target", "buffs", L["Position"], function() gUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "buffs", L["Position"], function() pcUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						growUpwards = {
 							name = L["Grow Upwards"],
@@ -969,7 +969,7 @@ gUF.options = {
 							order = 8,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "buffs", L["Grow Upwards"], function() gUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "player") end end},
+							arg = {"target", "buffs", L["Grow Upwards"], function() pcUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "player") end end},
 						},
 						expandLeft = {
 							name = L["Expand Left"],
@@ -978,7 +978,7 @@ gUF.options = {
 							order = 9,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "buffs", L["Expand Left"], function() gUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "buffs", L["Expand Left"], function() pcUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						showCooldownModels = {
 							name = L["Show Cooldown Models"],
@@ -987,7 +987,7 @@ gUF.options = {
 							order = 10,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "buffs", L["Show Cooldown Models"], function() gUF:ResetBuffsAndDebuffs("target") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "buffs", L["Show Cooldown Models"], function() pcUF:ResetBuffsAndDebuffs("target") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						classicBuffDebuffMode = {
 							name = L["Classic Buff & Debuff Mode"],
@@ -996,7 +996,7 @@ gUF.options = {
 							order = 11,
 							get = getOption,
 							set = setOption,
-							arg = {"target", nil, L["Classic Buff & Debuff Mode"], function() gUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", nil, L["Classic Buff & Debuff Mode"], function() pcUF:LayoutBuffs(nil, "target", "buffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 					},
 				},
@@ -1015,7 +1015,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "debuffs", L["Number of Debuffs"], function() gUF:ResetBuffsAndDebuffs("target") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "debuffs", L["Number of Debuffs"], function() pcUF:ResetBuffsAndDebuffs("target") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						buffsPerRow = {
 							name = L["Debuffs Per Row"],
@@ -1027,7 +1027,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "debuffs", L["Buffs Per Row"], function() gUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "debuffs", L["Buffs Per Row"], function() pcUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						horizontalSpacing = {
 							name = L["Horizontal Spacing"],
@@ -1039,7 +1039,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "debuffs", L["Horizontal Spacing"], function() gUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "debuffs", L["Horizontal Spacing"], function() pcUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						verticalSpacing = {
 							name = L["Vertical Spacing"],
@@ -1051,7 +1051,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "debuffs", L["Vertical Spacing"], function() gUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "debuffs", L["Vertical Spacing"], function() pcUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						xOffset = {
 							name = L["X Offset"],
@@ -1063,7 +1063,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "debuffs", L["X Offset"], function() gUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "debuffs", L["X Offset"], function() pcUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						yOffset = {
 							name = L["Y Offset"],
@@ -1075,7 +1075,7 @@ gUF.options = {
 							step = 1,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "debuffs", L["Y Offset"], function() gUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "debuffs", L["Y Offset"], function() pcUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						position = {
 							name = L["Position"],
@@ -1086,7 +1086,7 @@ gUF.options = {
 							get = getOption,
 							set = setOption,
 							values = anchorPoints,
-							arg = {"target", "debuffs", L["Position"], function() gUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "debuffs", L["Position"], function() pcUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						growUpwards = {
 							name = L["Grow Upwards"],
@@ -1095,7 +1095,7 @@ gUF.options = {
 							order = 8,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "debuffs", L["Grow Upwards"], function() gUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "debuffs", L["Grow Upwards"], function() pcUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						expandLeft = {
 							name = L["Expand Left"],
@@ -1104,7 +1104,7 @@ gUF.options = {
 							order = 9,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "debuffs", L["Expand Left"], function() gUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "debuffs", L["Expand Left"], function() pcUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						showCooldownModels = {
 							name = L["Show Cooldown Models"],
@@ -1113,7 +1113,7 @@ gUF.options = {
 							order = 10,
 							get = getOption,
 							set = setOption,
-							arg = {"target", "debuffs", L["Show Cooldown Models"], function() gUF:ResetBuffsAndDebuffs("target") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", "debuffs", L["Show Cooldown Models"], function() pcUF:ResetBuffsAndDebuffs("target") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 						classicBuffDebuffMode = {
 							name = L["Classic Buff & Debuff Mode"],
@@ -1122,7 +1122,7 @@ gUF.options = {
 							order = 11,
 							get = getOption,
 							set = setOption,
-							arg = {"target", nil, L["Classic Buff & Debuff Mode"], function() gUF:LayoutBuffs(nil, "target", "buffs") gUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then gUF:UNIT_AURA(nil, "target") end end},
+							arg = {"target", nil, L["Classic Buff & Debuff Mode"], function() pcUF:LayoutBuffs(nil, "target", "buffs") pcUF:LayoutBuffs(nil, "target", "debuffs") if (UnitExists("target")) then pcUF:UNIT_AURA(nil, "target") end end},
 						},
 					},
 				},
@@ -1159,4 +1159,4 @@ gUF.options = {
 	},
 }
 
---gUF.options = options
+--pcUF.options = options

@@ -1,10 +1,10 @@
 ## Interface: 120001
-## Title: gUF (Options)
-## Notes: Options interface for gUF
+## Title: pcUF (Options)
+## Notes: Options interface for pcUF
 ## Author: Global
 ## LoadOnDemand: 1
-## X-Website: https://github.com/Gl0bal06/gUF_Options
-## Dependencies: gUF
+## X-Website: https://github.com/Gl0bal06/pcUF_Options
+## Dependencies: pcUF
 
 #@no-lib-strip@
 Libs\AceDBOptions-3.0\AceDBOptions-3.0.lua
@@ -14,4 +14,4 @@ Libs\AceConfig-3.0\AceConfig-3.0.xml
 Libs\AceGUI-3.0-SharedMediaWidgets\widget.xml
 #@end-no-lib-strip@
 
-gUF_Options.lua
+pcUF_Options.lua
